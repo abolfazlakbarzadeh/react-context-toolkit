@@ -5,6 +5,7 @@ import peerDependencies from "rollup-plugin-peer-deps-external";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
+import jsonPlugin from "@rollup/plugin-json";
 import dts from "rollup-plugin-dts";
 
 export default [
@@ -25,6 +26,7 @@ export default [
     ],
     plugins: [
       terser(),
+      jsonPlugin(),
       commonjs(),
       postcss(),
       resolve(),

@@ -2,7 +2,7 @@
   "include": ["src"],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ESNext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
