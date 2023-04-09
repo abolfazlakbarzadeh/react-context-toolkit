@@ -1,0 +1,22 @@
+{
+  "name": "react-context-toolkit",
+  "version": "1.0.0",
+  "description": "a couple of tools to work with React Context",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "keywords": ["react", "context", "toolkit", "react-context"],
+  "author": "Abolfazl Akbarzadeh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abolfazlakbarzadeh/react-context-toolkit.git"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.4"
+  }
+}
