@@ -1,2 +1,4 @@
 import { ApiClient } from "./api-client";
-export { ApiClient };
+import { ContextToolkitInitializer, useReactContextToolkit } from "./initializer";
+import type { IContextToolkitProvider } from './initializer';
+export { ApiClient, ContextToolkitInitializer, useReactContextToolkit, IContextToolkitProvider };

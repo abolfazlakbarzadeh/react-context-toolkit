@@ -1,2 +1,2 @@
 export * from "./initializer";
-export * from './hooks'
+export * from './hooks';

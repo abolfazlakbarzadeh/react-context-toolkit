@@ -1,5 +1,6 @@
 import * as _ from "lodash";
-import React, { createContext, ReactElement, useContext, useReducer } from "react";
+import React, { createContext, ReactElement, useReducer } from "react";
+import { functionsMaker } from "./functions-maker";
 
 export interface IContextToolkitProvider {
     reducer: (state: any, action: any) => any;
@@ -23,10 +24,13 @@ export function ContextToolkitInitializer({
         return reducer?.(_.cloneDeep(state), action)
     }, initialState)
 
+    const functions = functionsMaker(state, dispatch, "", false)
+
     return (
         <ReactContextToolkitContext.Provider value={{
             state,
             dispatch,
+            functions,
             ...state
         }}>
             {children}

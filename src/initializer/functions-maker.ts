@@ -1,3 +1,5 @@
+import { getDatatypeName } from "../utils/helper-functions";
+
 export function functionsMaker(
   state: any,
   dispatch: (action: any) => void,
@@ -87,4 +89,5 @@ export function functionsMaker(
 
     return functions;
   }
+  return {};
 }

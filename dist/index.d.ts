@@ -1,4 +1,5 @@
 import { AxiosInstance, CreateAxiosDefaults, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import { ReactElement } from 'react';
 
 interface IApiClientsOptions {
     clientOptions?: CreateAxiosDefaults;
@@ -9,4 +10,19 @@ interface IApiClientsOptions {
 }
 declare function ApiClient(options?: IApiClientsOptions): AxiosInstance;
 
-export { ApiClient };
+interface IContextToolkitProvider {
+    reducer: (state: any, action: any) => any;
+    initialState: any;
+    children: any;
+}
+interface IReactContextToolkitContext {
+    state: any;
+    dispatch: (action: any) => void;
+}
+declare function ContextToolkitInitializer({ reducer, children, initialState }: IContextToolkitProvider): ReactElement;
+
+declare function useReactContextToolkit(): Partial<IReactContextToolkitContext> & {
+    [k: string]: any;
+};
+
+export { ApiClient, ContextToolkitInitializer, IContextToolkitProvider, useReactContextToolkit };
