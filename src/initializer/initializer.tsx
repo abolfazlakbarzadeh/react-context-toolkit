@@ -1,11 +1,17 @@
 import * as _ from "lodash";
-import React, { createContext, ReactElement, useReducer } from "react";
+import React, { createContext, ReactElement, useMemo, useReducer } from "react";
+import { getDatatypeName } from "../utils/helper-functions";
 import { functionsMaker } from "./functions-maker";
 
 export interface IContextToolkitProvider {
-    reducer: (state: any, action: any) => any;
+    reducer: {
+        [k: string]: (state: any, action: any) => any
+    };
     initialState: any
-    children: any
+    children: any;
+    customFunctions?: (dispatch: (action: any) => void, state: any) => {
+        [k: string]: Function | object
+    };
 }
 export interface IReactContextToolkitContext {
     state: any;
@@ -16,26 +22,41 @@ export const ReactContextToolkitContext = createContext<Partial<IReactContextToo
 export function ContextToolkitInitializer({
     reducer,
     children,
-    initialState
+    initialState,
+    customFunctions
 }: IContextToolkitProvider): ReactElement {
 
 
     const [state, dispatch] = useReducer((state: any, action: any) => {
-        return reducer?.(_.cloneDeep(state), action)
+        const { type, data } = action || {}
+        if (reducer[type] && typeof reducer[type] == "function") {
+            return reducer[type](_.cloneDeep(state), action)
+        }
+        if (type === "update-state") {
+            return _.update(_.cloneDeep(state), data.path, (stateValue) => {
+                if (getDatatypeName(data.key) === "object") {
+                    for (const [key, value] of Object.entries(data.key)) {
+                        stateValue[key] = value
+                    }
+                } else {
+                    stateValue[data.key] = data.value
+                }
+                return stateValue
+            })
+        }
+        return state
     }, initialState)
 
-    const functions = functionsMaker(state, dispatch, "", false)
+    const functions = functionsMaker(reducer)(state, dispatch, "", false)
 
-    return (
+    return useMemo(() => (
         <ReactContextToolkitContext.Provider value={{
             state,
             dispatch,
-            functions,
+            functions: customFunctions && typeof customFunctions == "function" ? _.merge(functions, customFunctions(dispatch, state)) : functions,
             ...state
         }}>
             {children}
         </ReactContextToolkitContext.Provider>
-    )
-
-
+    ), [state])
 }

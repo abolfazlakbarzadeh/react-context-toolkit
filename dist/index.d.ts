@@ -11,15 +11,20 @@ interface IApiClientsOptions {
 declare function ApiClient(options?: IApiClientsOptions): AxiosInstance;
 
 interface IContextToolkitProvider {
-    reducer: (state: any, action: any) => any;
+    reducer: {
+        [k: string]: (state: any, action: any) => any;
+    };
     initialState: any;
     children: any;
+    customFunctions?: (dispatch: (action: any) => void, state: any) => {
+        [k: string]: Function | object;
+    };
 }
 interface IReactContextToolkitContext {
     state: any;
     dispatch: (action: any) => void;
 }
-declare function ContextToolkitInitializer({ reducer, children, initialState }: IContextToolkitProvider): ReactElement;
+declare function ContextToolkitInitializer({ reducer, children, initialState, customFunctions }: IContextToolkitProvider): ReactElement;
 
 declare function useReactContextToolkit(): Partial<IReactContextToolkitContext> & {
     [k: string]: any;
