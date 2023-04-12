@@ -1,5 +1,5 @@
 {
-  "name": "react-context-toolkit",
+  "name": "@abak/react-context-toolkit",
   "version": "1.0.0",
   "description": "a couple of tools to work with React Context",
   "type": "module",

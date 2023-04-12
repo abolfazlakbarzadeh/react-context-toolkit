@@ -8,7 +8,6 @@ export interface IContextToolkitProvider {
         [k: string]: (state: any, action: any) => any
     };
     initialState: any
-    children: any;
     customFunctions?: (dispatch: (action: any) => void, state: any) => {
         [k: string]: Function | object
     };
@@ -24,7 +23,7 @@ export function ContextToolkitInitializer({
     children,
     initialState,
     customFunctions
-}: IContextToolkitProvider): ReactElement {
+}: React.PropsWithChildren<IContextToolkitProvider>) {
 
 
     const [state, dispatch] = useReducer((state: any, action: any) => {

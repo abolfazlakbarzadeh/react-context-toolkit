@@ -6,11 +6,10 @@ export type IUseReactContextToolkitReturn = {
   state?: any;
   dispatch?: (action: any) => void;
   [k: string]: any;
-}
+};
 
-export function useReactContextToolkit() {
+export function useReactContextToolkit(): IUseReactContextToolkitReturn {
   const context = useContext(ReactContextToolkitContext);
   if (context) return context;
-  else
-  return {};
+  else return {};
 }

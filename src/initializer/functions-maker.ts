@@ -61,9 +61,12 @@ export const functionsMaker = (reducer: any) =>
         };
         if (state?.length) {
           functions.update = function (key: any, value: any) {
-            if (reducer[_.camelCase(`${reducer_keys}${_.startCase("item")}`)]) {
+            const reducerKey = _.camelCase(
+              `${reducer_keys}${_.startCase("item")}`
+            );
+            if (reducer[reducerKey]) {
               dispatch({
-                type: _.camelCase(`${reducer_keys}${_.startCase("item")}`),
+                type: reducerKey,
                 data: {
                   index,
                   key,
