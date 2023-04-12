@@ -10,7 +10,7 @@ As you know, implementing an optimal context may take a lot of time or make our 
 
 # Additional
 
-There is an axios instance maker so you can use it and by a faw addition functions it have control something's.
+There is an axios instance constructor so you can use it and have multiple controls with additional functions.
 
 ## Installation
 
