@@ -1,10 +1,9 @@
-import React, { ReactElement } from "react";
+import React from "react";
 export interface IContextToolkitProvider {
-    reducer: {
+    reducer?: {
         [k: string]: (state: any, action: any) => any;
     };
     initialState: any;
-    children: any;
     customFunctions?: (dispatch: (action: any) => void, state: any) => {
         [k: string]: Function | object;
     };
@@ -16,4 +15,4 @@ export interface IReactContextToolkitContext {
 export declare const ReactContextToolkitContext: React.Context<Partial<IReactContextToolkitContext> & {
     [k: string]: any;
 }>;
-export declare function ContextToolkitInitializer({ reducer, children, initialState, customFunctions }: IContextToolkitProvider): ReactElement;
+export declare function ContextToolkitInitializer({ reducer, children, initialState, customFunctions }: React.PropsWithChildren<IContextToolkitProvider>): JSX.Element;

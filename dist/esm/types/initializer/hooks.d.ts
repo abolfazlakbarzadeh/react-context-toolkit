@@ -4,6 +4,4 @@ export type IUseReactContextToolkitReturn = {
     dispatch?: (action: any) => void;
     [k: string]: any;
 };
-export declare function useReactContextToolkit(): Partial<import("./initializer").IReactContextToolkitContext> & {
-    [k: string]: any;
-};
+export declare function useReactContextToolkit(): IUseReactContextToolkitReturn;

@@ -1,4 +1,4 @@
-# React Context Toolkit
+# React Context Toolkit v1.0.5
 
 Hey everyone! 😃, so this is my first open-source package that helps React developers work with React-Context.
 As you know, implementing an optimal context may take a lot of time or make our code dirty, although there are those who claim that there is no problem with this but the readability and extensibility of the code is a priority :)

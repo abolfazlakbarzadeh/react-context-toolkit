@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { getDatatypeName } from "../utils/helper-functions";
 
-export const functionsMaker = (reducer: any) =>
+export const functionsMaker = (reducer?: any) =>
   function (
     state: any,
     dispatch: (action: any) => void,
@@ -19,7 +19,7 @@ export const functionsMaker = (reducer: any) =>
           [k: string]: any;
         } = {
           add(data?: any) {
-            if (reducer[_.camelCase(reducer_keys)]) {
+            if (reducer?.[_.camelCase(reducer_keys)]) {
               dispatch({
                 type: _.camelCase(`${reducer_keys}${_.startCase("add")}`),
                 data: {
@@ -40,7 +40,7 @@ export const functionsMaker = (reducer: any) =>
             }
           },
           remove() {
-            if (reducer[_.camelCase(reducer_keys)]) {
+            if (reducer?.[_.camelCase(reducer_keys)]) {
               dispatch({
                 type: _.camelCase(`${reducer_keys}${_.startCase("remove")}`),
                 data: {
@@ -64,7 +64,7 @@ export const functionsMaker = (reducer: any) =>
             const reducerKey = _.camelCase(
               `${reducer_keys}${_.startCase("item")}`
             );
-            if (reducer[reducerKey]) {
+            if (reducer?.[reducerKey]) {
               dispatch({
                 type: reducerKey,
                 data: {
@@ -109,7 +109,7 @@ export const functionsMaker = (reducer: any) =>
         [k: string]: any;
       } = {
         update(key: any, value: any) {
-          if (reducer[_.camelCase(reducer_keys)]) {
+          if (reducer?.[_.camelCase(reducer_keys)]) {
             dispatch({
               type: _.camelCase(reducer_keys),
               data: {

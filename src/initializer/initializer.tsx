@@ -1,10 +1,10 @@
 import * as _ from "lodash";
-import React, { createContext, ReactElement, useMemo, useReducer } from "react";
+import React, { createContext, useMemo, useReducer } from "react";
 import { getDatatypeName } from "../utils/helper-functions";
 import { functionsMaker } from "./functions-maker";
 
 export interface IContextToolkitProvider {
-    reducer: {
+    reducer?: {
         [k: string]: (state: any, action: any) => any
     };
     initialState: any
@@ -28,7 +28,7 @@ export function ContextToolkitInitializer({
 
     const [state, dispatch] = useReducer((state: any, action: any) => {
         const { type, data } = action || {}
-        if (reducer[type] && typeof reducer[type] == "function") {
+        if (reducer?.[type] && typeof reducer?.[type] == "function") {
             return reducer[type](_.cloneDeep(state), action)
         }
         if (type === "update-state") {
