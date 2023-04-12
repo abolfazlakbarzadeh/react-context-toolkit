@@ -21,7 +21,7 @@ export const functionsMaker = (reducer: any) =>
           add(data?: any) {
             if (reducer[_.camelCase(reducer_keys)]) {
               dispatch({
-                type: _.camelCase(reducer_keys),
+                type: _.camelCase(`${reducer_keys}${_.startCase("add")}`),
                 data: {
                   index,
                   data,
@@ -42,7 +42,7 @@ export const functionsMaker = (reducer: any) =>
           remove() {
             if (reducer[_.camelCase(reducer_keys)]) {
               dispatch({
-                type: _.camelCase(reducer_keys),
+                type: _.camelCase(`${reducer_keys}${_.startCase("remove")}`),
                 data: {
                   index,
                 },
