@@ -1,6 +1,6 @@
 {
   "name": "@abak/react-context-toolkit",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "a couple of tools to work with React Context",
   "type": "module",
   "main": "dist/cjs/index.js",
