@@ -83,3 +83,11 @@ function TheChildComponent() {
   return <button onClick={onClickHandler}>click me</button>;
 }
 ```
+
+## Contributing
+
+Contributions are always welcome!
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
