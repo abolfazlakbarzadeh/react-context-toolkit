@@ -1,4 +1,4 @@
-# React Context Toolkit v1.0.5
+# React Context Toolkit
 
 Hey everyone! 😃, so this is my first open-source package that helps React developers work with React-Context.
 As you know, implementing an optimal context may take a lot of time or make our code dirty, although there are those who claim that there is no problem with this but the readability and extensibility of the code is a priority :)
@@ -25,7 +25,7 @@ Install react-context-toolkit with npm
 Next, we need to import the `ContextToolkitInitializer` into the component that is the parent of all the components we want to use the context inside:
 
 ```ts
-import { ContextToolkitInitializer } from 'react-context-toolkit'
+import { ContextToolkitInitializer } from '@abak/react-context-toolkit'
 
 function TheParentComponent() {
 
@@ -62,7 +62,7 @@ function TheParentComponent() {
 and, in your nested components:
 
 ```ts
-import { useReactContextToolkit } from "react-context-toolkit";
+import { useReactContextToolkit } from "@abak/react-context-toolkit";
 
 function TheChildComponent() {
   const { functions, dispatch, state } = useReactContextToolkit();
