@@ -8,11 +8,13 @@ export interface IContextToolkitProvider {
         [k: string]: (state: any, action: any) => any
     };
     initialState: any
-    customFunctions?: (dispatch: (action: any) => void, state: any) => {
+    functions?: (dispatch: (action: any) => void, state: any) => {
         [k: string]: Function | object
     };
 }
 export interface IReactContextToolkitContext {
+    initialState: any,
+    functions: any,
     state: any;
     dispatch: (action: any) => void
 }
@@ -22,23 +24,33 @@ export function ContextToolkitInitializer({
     reducer,
     children,
     initialState,
-    customFunctions
+    functions: _functions
 }: React.PropsWithChildren<IContextToolkitProvider>) {
 
 
     const [state, dispatch] = useReducer((state: any, action: any) => {
-        const { type, data } = action || {}
+        const { type, data, subType } = action || {}
         if (reducer?.[type] && typeof reducer?.[type] == "function") {
             return reducer[type](_.cloneDeep(state), action)
         }
         if (type === "update-state") {
             return _.update(_.cloneDeep(state), data.path, (stateValue) => {
-                if (getDatatypeName(data.key) === "object") {
-                    for (const [key, value] of Object.entries(data.key)) {
-                        stateValue[key] = value
+                switch (subType) {
+                    case "array-add-item": {
+                        if (data.data && getDatatypeName(stateValue) === "array") {
+                            (stateValue as Array<any>).splice(data.index + 1, 0, data.data)
+                        }
+                        break
                     }
-                } else {
-                    stateValue[data.key] = data.value
+                    default: {
+                        if (getDatatypeName(data.key) === "object") {
+                            for (const [key, value] of Object.entries(data.key)) {
+                                stateValue[key] = value
+                            }
+                        } else {
+                            stateValue[data.key] = data.value
+                        }
+                    }
                 }
                 return stateValue
             })
@@ -46,16 +58,17 @@ export function ContextToolkitInitializer({
         return state
     }, initialState)
 
-    const functions = functionsMaker(reducer)(state, dispatch, "", false)
+    const functions = useMemo(() => functionsMaker(reducer)(state, dispatch, "", false), [state])
 
     return useMemo(() => (
         <ReactContextToolkitContext.Provider value={{
             state,
             dispatch,
-            functions: customFunctions && typeof customFunctions == "function" ? _.merge(functions, customFunctions(dispatch, state)) : functions,
+            functions: _functions && typeof _functions == "function" ? _.merge(functions, _functions(dispatch, state)) : functions,
+            initialState: _.cloneDeep(initialState),
             ...state
         }}>
             {children}
         </ReactContextToolkitContext.Provider>
-    ), [state])
+    ), [_functions, children, functions, state])
 }

@@ -15,11 +15,11 @@ interface IContextToolkitProvider {
         [k: string]: (state: any, action: any) => any;
     };
     initialState: any;
-    customFunctions?: (dispatch: (action: any) => void, state: any) => {
+    functions?: (dispatch: (action: any) => void, state: any) => {
         [k: string]: Function | object;
     };
 }
-declare function ContextToolkitInitializer({ reducer, children, initialState, customFunctions }: React.PropsWithChildren<IContextToolkitProvider>): JSX.Element;
+declare function ContextToolkitInitializer({ reducer, children, initialState, functions: _functions }: React.PropsWithChildren<IContextToolkitProvider>): JSX.Element;
 
 type IUseReactContextToolkitReturn = {
     functions?: any;

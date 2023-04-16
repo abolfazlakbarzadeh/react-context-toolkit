@@ -11,14 +11,14 @@ export const functionsMaker = (reducer?: any) =>
   ) {
     if (isArray) {
       if (getDatatypeName(state) !== "array") return;
-      return function (index: number) {
+      return function (index: number = -1) {
         let functions: {
           add(data?: any): void;
           remove(): void;
           update?(key: any, value: any): void;
           [k: string]: any;
         } = {
-          add(data?: any) {
+          add(data: any) {
             if (reducer?.[_.camelCase(reducer_keys)]) {
               dispatch({
                 type: _.camelCase(`${reducer_keys}${_.startCase("add")}`),
